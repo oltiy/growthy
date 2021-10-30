@@ -12,7 +12,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -29,7 +30,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
   ],
   exports: [
     MatGridListModule,
@@ -43,7 +45,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
   ],
 })
 export class MaterialSharedModule {}

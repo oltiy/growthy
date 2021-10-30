@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -8,18 +9,20 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  addressForm = this.fb.group({
-    email: [null, Validators.required, Validators.email],
-    password: [null, Validators.required],
-    status: [null, Validators.required],
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.email]),
+    password: new FormControl('', [Validators.required]),
+    status: new FormControl(null, [Validators.required]),
   });
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(private auth: AuthService) {}
 
-  Submit(): void {
-    if (this.addressForm.value.status === 'admin') {
-      let loginUserEmail = this.addressForm.value.email;
-      let loginUserPassword = this.addressForm.value.password;
+  isLoggedIn$: Observable<boolean> = this.auth.isLoggedIn$;
+
+  login(): void {
+    if (this.loginForm.value.status === 'admin') {
+      let loginUserEmail = this.loginForm.value.email;
+      let loginUserPassword = this.loginForm.value.password;
       this.auth.login(loginUserEmail, loginUserPassword);
     } else {
       alert(

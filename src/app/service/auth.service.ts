@@ -1,8 +1,6 @@
-import { JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { User } from '../users/user.interface';
 
 let Admins: User[] = [
@@ -18,41 +16,58 @@ let Admins: User[] = [
   providedIn: 'root',
 })
 export class AuthService {
-  private admin$: BehaviorSubject<User[] | null> = new BehaviorSubject<
-    User[] | null
-  >(Admins);
-
-  // activeAdmin: User | undefined;
-
+  isLoggedIn: boolean = false;
+  isLoggedIn$ = new BehaviorSubject<boolean>(this.isLoggedIn);
   constructor(private router: Router) {}
 
-  getUser() {
+  getAdmin() {
     return localStorage.getItem('admin');
   }
 
-  private setUser(admin: User) {
+  private setAdmin(admin: User) {
     localStorage.setItem('admin', JSON.stringify(admin));
   }
-
-  login(loginUserEmail: string, loginUserPassword: string) {
-    this.admin$.asObservable().subscribe((data: any) => {
-      for (let admin of data) {
-        if (admin.email === loginUserEmail) {
-          if (admin.password === loginUserPassword) {
-            this.router.navigateByUrl('/users');
-            this.setUser(admin);
-          } else {
-            alert('Please check your password');
-          }
+  // option 1
+  // login(loginUserEmail: string, loginUserPassword: string) {
+  //   this.admin$.asObservable().subscribe((data: any) => {
+  //     for (let admin of data) {
+  //       if (admin.email === loginUserEmail) {
+  //         if (admin.password === loginUserPassword) {
+  //           this.router.navigateByUrl('/users');
+  //           this.setAdmin(admin);
+  //         } else {
+  //           alert('Please check that you entered the right password);
+  //         }
+  //       } else {
+  //         alert('Please check that you entered the right email ');
+  //       }
+  //     }
+  //   });
+  // }
+  // option 2
+  async login(loginUserEmail: string, loginUserPassword: string) {
+    await Admins.find((admin) => {
+      if (admin.email === loginUserEmail) {
+        if (admin.password === loginUserPassword) {
+          this.setAdmin(admin);
+          this.isLoggedIn$.next(true);
+          this.router.navigateByUrl('/users');
         } else {
-          alert('Please check your email ');
+          alert('Please check that you entered the right password');
+          this.isLoggedIn$.next(false);
+          this.router.navigateByUrl('/login');
         }
+      } else {
+        alert('Please check that you entered the right email ');
+        this.isLoggedIn$.next(false);
+        this.router.navigateByUrl('/login');
       }
     });
   }
 
   logout() {
     localStorage.clear();
+
     this.router.navigateByUrl('/login');
   }
 }
