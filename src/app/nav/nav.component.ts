@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../auth/state/auth.service';
+import { AuthQuery } from '../auth/state/auth.query';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,8 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
-  isLoggedIn$: Observable<boolean> = this.auth.isLoggedIn$;
+  StatusLoggedIn$: Observable<boolean> = this.authQuery.selectIsLogin$;
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -20,11 +22,19 @@ export class NavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private auth: AuthService
+    private authQuery: AuthQuery,
+    private authService: AuthService
   ) {}
 
   logout() {
-    this.auth.isLoggedIn$.next(false);
+    this.authService.setUser(null);
     localStorage.removeItem('admin');
+  }
+  isLogIn() {
+    this.StatusLoggedIn$.subscribe((data) => {
+      if (!data) {
+        alert('Please Login');
+      }
+    });
   }
 }

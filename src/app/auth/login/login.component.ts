@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../state/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,15 +14,13 @@ export class LoginComponent {
     status: new FormControl(null, [Validators.required]),
   });
 
-  constructor(private auth: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-  isLoggedIn$: Observable<boolean> = this.auth.isLoggedIn$;
-
-  login(): void {
+  login() {
     if (this.loginForm.value.status === 'admin') {
       let loginUserEmail = this.loginForm.value.email;
       let loginUserPassword = this.loginForm.value.password;
-      this.auth.login(loginUserEmail, loginUserPassword);
+      this.authService.login(loginUserEmail, loginUserPassword);
     } else {
       alert(
         'Currently, the project works only for admin, please choose admin option, and only between us. Admin email is a@a.com and the password is 1234'
