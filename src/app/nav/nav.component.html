@@ -7,13 +7,13 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
 
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar *ngIf="(StatusLoggedIn$|async)">Menu</mat-toolbar>
 
     <mat-nav-list>
 
-      <a mat-list-item (click)="isLogIn()" routerLink="users">Users</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a *ngIf="(selectIsAdmin$|async)" mat-list-item routerLink="users">Users</a>
+      <a *ngIf="(StatusLoggedIn$|async)" mat-list-item href="#">Link 2</a>
+      <a *ngIf="(StatusLoggedIn$|async)" mat-list-item href="#">Link 3</a>
     </mat-nav-list>
 
   </mat-sidenav>
@@ -25,14 +25,11 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <div>Together We Growthy</div>
-      <div *ngIf="(StatusLoggedIn$|async); then logoutIt"></div>
 
+      <a *ngIf="(StatusLoggedIn$|async)" routerLink="login">
+        <div (click)="logout()">Logout</div>
+      </a>
 
-      <ng-template #logoutIt>
-        <a routerLink="login">
-          <div (click)="logout()">Logout</div>
-        </a>
-      </ng-template>
 
 
 

@@ -17,14 +17,8 @@ export class LoginComponent {
   constructor(private authService: AuthService) {}
 
   login() {
-    if (this.loginForm.value.status === 'admin') {
-      let loginUserEmail = this.loginForm.value.email;
-      let loginUserPassword = this.loginForm.value.password;
-      this.authService.login(loginUserEmail, loginUserPassword);
-    } else {
-      alert(
-        'Currently, the project works only for admin, please choose admin option, and only between us. Admin email is a@a.com and the password is 1234'
-      );
-    }
+    let loginUserEmail = this.loginForm.value.email;
+    let loginUserPassword = this.loginForm.value.password;
+    this.authService.login(loginUserEmail, loginUserPassword);
   }
 }

@@ -7,13 +7,13 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { AuthQuery } from './auth/state/auth.query';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class UserStatusGuard implements CanActivate {
   constructor(private router: Router, private authQuery: AuthQuery) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,22 +23,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.authQuery.selectIsLogin$.pipe(
-      tap((isLogin) => {
-        if (!isLogin) {
+    return this.authQuery.selectIsAdmin$.pipe(
+      tap((isAdmin) => {
+        if (!isAdmin) {
           this.router.navigateByUrl('/login');
         }
       })
     );
-
-    // let a: boolean = false;
-    // this.statusLoggedIn$.subscribe((data) => {
-    //   if (!data) {
-    //     a = false;
-    //   } else {
-    //     a = true;
-    //   }
-    // });
-    // return a;
   }
 }

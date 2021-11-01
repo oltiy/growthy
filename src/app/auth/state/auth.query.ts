@@ -11,7 +11,11 @@ export class AuthQuery extends Query<AuthState> {
       return true;
     } else return false;
   });
-
+  selectIsAdmin$ = this.select((state) => {
+    if (state.user?.admin) {
+      return true;
+    } else return false;
+  });
   constructor(protected store: AuthStore) {
     super(store);
   }

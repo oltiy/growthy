@@ -12,6 +12,7 @@ import { AuthQuery } from '../auth/state/auth.query';
 })
 export class NavComponent {
   StatusLoggedIn$: Observable<boolean> = this.authQuery.selectIsLogin$;
+  selectIsAdmin$: Observable<boolean> = this.authQuery.selectIsAdmin$;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -29,12 +30,5 @@ export class NavComponent {
   logout() {
     this.authService.setUser(null);
     localStorage.removeItem('admin');
-  }
-  isLogIn() {
-    this.StatusLoggedIn$.subscribe((data) => {
-      if (!data) {
-        alert('Please Login');
-      }
-    });
   }
 }

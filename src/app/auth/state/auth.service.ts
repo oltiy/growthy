@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, tap } from 'rxjs/operators';
 import { AuthState, AuthStore } from './auth.store';
-import { AuthQuery } from './auth.query';
-import { Observable } from 'rxjs';
+
 import { User } from '../../users/user.interface';
 
 let Admins: User[] = [
@@ -13,6 +11,7 @@ let Admins: User[] = [
     firstName: 'Hydrogen',
     lastName: 'cohen',
     password: '1234',
+    admin: true,
   },
   {
     userId: 2,
@@ -20,6 +19,7 @@ let Admins: User[] = [
     firstName: 'Helium',
     lastName: 'levi',
     password: '5678',
+    admin: true,
   },
   {
     userId: 3,
@@ -27,6 +27,7 @@ let Admins: User[] = [
     firstName: 'Lithium',
     lastName: 'yair',
     password: '9876',
+    admin: false,
   },
   {
     userId: 4,
@@ -34,6 +35,7 @@ let Admins: User[] = [
     firstName: 'Beryllium',
     lastName: 'assaf',
     password: '5432',
+    admin: false,
   },
   {
     userId: 5,
@@ -41,16 +43,13 @@ let Admins: User[] = [
     firstName: 'Boron',
     lastName: 'gorn',
     password: '0000',
+    admin: false,
   },
 ];
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(
-    private authStore: AuthStore,
-    private router: Router,
-    private authQuery: AuthQuery
-  ) {}
+  constructor(private authStore: AuthStore, private router: Router) {}
 
   setUser(user: User | null) {
     this.authStore.update((authState: AuthState) => {
