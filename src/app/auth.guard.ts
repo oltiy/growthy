@@ -30,15 +30,5 @@ export class AuthGuard implements CanActivate {
         }
       })
     );
-
-    // let a: boolean = false;
-    // this.statusLoggedIn$.subscribe((data) => {
-    //   if (!data) {
-    //     a = false;
-    //   } else {
-    //     a = true;
-    //   }
-    // });
-    // return a;
   }
 }

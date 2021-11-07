@@ -1,0 +1,35 @@
+import { Injectable } from '@angular/core';
+
+import { UserStatus } from '../user-status.interface';
+import { UsersState, UsersStore } from './users.store';
+import { UsersQuery } from './users.query';
+import { Router } from '@angular/router';
+
+@Injectable({ providedIn: 'root' })
+export class UsersService {
+  constructor(
+    private usersStore: UsersStore,
+    private usersQuery: UsersQuery,
+    private router: Router
+  ) {}
+  addToUsersStauts(users: UserStatus[]) {
+    this.usersStore.update((userState: UsersState) => {
+      return { ...userState, users };
+    });
+  }
+
+  updateUserStatus(addNewUser: UserStatus) {
+    let usersUpdate: UserStatus[];
+    this.usersQuery.selectUsers$.subscribe((data) => {
+      let checkIfTheUserNew = data.filter(
+        (user) => user.email === addNewUser.email
+      );
+      if (checkIfTheUserNew.length === 0) {
+        addNewUser.userId = data.length + 1;
+        usersUpdate = [...data, addNewUser];
+        console.log(data);
+      }
+    });
+    this.addToUsersStauts(usersUpdate!);
+  }
+}

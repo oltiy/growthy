@@ -12,7 +12,7 @@
     <mat-nav-list>
 
       <a *ngIf="(selectIsAdmin$|async)" mat-list-item routerLink="users">Users</a>
-      <a *ngIf="(StatusLoggedIn$|async)" mat-list-item href="#">Link 2</a>
+      <a *ngIf="(selectIsAdmin$|async)" mat-list-item routerLink="create">Creat user</a>
       <a *ngIf="(StatusLoggedIn$|async)" mat-list-item href="#">Link 3</a>
     </mat-nav-list>
 

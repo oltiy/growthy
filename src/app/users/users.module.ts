@@ -5,6 +5,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UsersRoutingModule } from './users-routing.moduel';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [UsersComponent],
@@ -14,6 +17,10 @@ import { UsersRoutingModule } from './users-routing.moduel';
     MatPaginatorModule,
     MatSortModule,
     UsersRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class UsersModule {}

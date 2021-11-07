@@ -15,6 +15,14 @@ const routes: Routes = [
       import('./users/users.module').then((m) => m.UsersModule),
     canActivate: [AuthGuard, UserStatusGuard],
   },
+  {
+    path: 'create',
+    loadChildren: () =>
+      import('./create-user/create-user.module').then(
+        (m) => m.CreateUserModule
+      ),
+    canActivate: [AuthGuard, UserStatusGuard],
+  },
 ];
 
 @NgModule({

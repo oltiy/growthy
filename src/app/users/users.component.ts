@@ -1,30 +1,51 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { UsersDataSource, UsersItem } from './users-datasource';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
+import { MatTableDataSource } from '@angular/material/table';
+
+import { UsersService } from './state/users.service';
+import { User } from './user.interface';
+import { CreateUserQuery } from '../create-user/state/create-user.query';
+import { BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { UsersQuery } from './state/users.query';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<UsersItem>;
-  dataSource: UsersDataSource;
-
+export class UsersComponent {
+  dataSource = new MatTableDataSource<User>();
+  filters = new FormGroup({
+    id: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    email: new FormControl(''),
+    phoneNumber: new FormControl(''),
+    // openProjects: new FormControl(''),
+    // workingOnProjects: new FormControl(''),
+    // doneProjects: new FormControl(''),
+  });
+  updateUserTable = new BehaviorSubject<User[]>(this.dataSource.data);
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = [
+    'id',
+    'firstName',
+    'lastName',
+    'phoneNumber',
+    'email',
+    // 'openProjects',
+    // 'workingOnProjects',
+    // 'doneProjects',
+  ];
 
-  constructor() {
-    this.dataSource = new UsersDataSource();
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  constructor(
+    private createUserQuery: CreateUserQuery,
+    private userQuery: UsersQuery
+  ) {
+    this.createUserQuery.userData$.subscribe((data) => {
+      this.dataSource.data = data;
+    });
   }
 }
