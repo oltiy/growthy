@@ -22,5 +22,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
+  exports: [MatTableModule],
 })
 export class UsersModule {}

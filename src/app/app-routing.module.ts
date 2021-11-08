@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
+import { TableBasicExample } from './task/task.component';
 import { UserStatusGuard } from './user-status.guard';
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
         (m) => m.CreateUserModule
       ),
     canActivate: [AuthGuard, UserStatusGuard],
+  },
+  {
+    path: 'task',
+    component: TableBasicExample,
   },
 ];
 

@@ -7,8 +7,8 @@ import { AppComponent } from './app.component';
 import { GoalsComponent } from './goals/goals.component';
 import { PointsComponent } from './points/points.component';
 import { MilestonesComponent } from './milestones/milestones.component';
-import { TaskComponent } from './task/task.component';
-
+import { TableBasicExample } from './task/task.component';
+import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NavComponent } from './nav/nav.component';
@@ -25,7 +25,7 @@ import { environment } from '../environments/environment';
     GoalsComponent,
     PointsComponent,
     MilestonesComponent,
-    TaskComponent,
+    TableBasicExample,
     NavComponent,
   ],
   imports: [
@@ -36,8 +36,15 @@ import { environment } from '../environments/environment';
     LayoutModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule,
+    MatTableModule,
   ],
-  providers: [AuthGuard, { provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }}],
+  providers: [
+    AuthGuard,
+    {
+      provide: NG_ENTITY_SERVICE_CONFIG,
+      useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

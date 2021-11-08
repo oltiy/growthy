@@ -8,25 +8,30 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NavComponent } from './nav.component';
+import { By } from '@angular/platform-browser';
+import { AuthService } from '../auth/state/auth.service';
 
 describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [NavComponent],
-      imports: [
-        NoopAnimationsModule,
-        LayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatListModule,
-        MatSidenavModule,
-        MatToolbarModule,
-      ]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [NavComponent],
+        imports: [
+          NoopAnimationsModule,
+          LayoutModule,
+          MatButtonModule,
+          MatIconModule,
+          MatListModule,
+          MatSidenavModule,
+          MatToolbarModule,
+        ],
+        providers: [{ provide: AuthService, useValue: AuthService }],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavComponent);
@@ -36,5 +41,12 @@ describe('NavComponent', () => {
 
   it('should compile', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('before auth login the navbar shoulde be hide', () => {
+    it('should show be ampty', () => {
+      const navElement = fixture.debugElement.query(By.css('a'));
+      expect(navElement).toBeNull();
+    });
   });
 });
