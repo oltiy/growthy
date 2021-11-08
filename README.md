@@ -56,7 +56,7 @@ This project uses a number of open source projects to work properly:
 
 -To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-# Yoni olti
+# Developer Yoni olti
 
 [![N|Solid](https://thumbnailer.mixcloud.com/unsafe/160x160/profile/a/e/7/8/fe97-9ba5-4e37-942f-d0b88b1bcf90)]
 
