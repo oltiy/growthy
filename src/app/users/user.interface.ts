@@ -4,6 +4,6 @@ export interface User {
   lastName?: string;
   email: string;
   password: string;
-  phoneNumber?: number;
+  phoneNumber?: string;
   admin?: boolean;
 }

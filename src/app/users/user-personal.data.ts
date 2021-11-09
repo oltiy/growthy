@@ -7,6 +7,7 @@ export let users: User[] = [
     firstName: 'Hydrogen',
     lastName: 'cohen',
     password: '1234',
+    phoneNumber: '0505551111',
     admin: true,
   },
   {
@@ -15,6 +16,7 @@ export let users: User[] = [
     firstName: 'Helium',
     lastName: 'levi',
     password: '5678',
+    phoneNumber: '0505552222',
     admin: true,
   },
   {
@@ -23,6 +25,7 @@ export let users: User[] = [
     firstName: 'Lithium',
     lastName: 'yair',
     password: '9876',
+    phoneNumber: '0505553333',
     admin: false,
   },
   {
@@ -31,6 +34,7 @@ export let users: User[] = [
     firstName: 'Beryllium',
     lastName: 'assaf',
     password: '5432',
+    phoneNumber: '0505554444',
     admin: false,
   },
   {
@@ -39,6 +43,7 @@ export let users: User[] = [
     firstName: 'Boron',
     lastName: 'gorn',
     password: '0000',
+    phoneNumber: '0505555555',
     admin: false,
   },
 ];

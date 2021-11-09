@@ -7,7 +7,7 @@ export class AuthQuery extends Query<AuthState> {
   selectId$ = this.select('user');
 
   selectIsLogin$ = this.select((state) => {
-    if (!!state.user?.email && !!state.user?.email) {
+    if (!!state.user?.email && !!state.user?.password) {
       return true;
     } else return false;
   });

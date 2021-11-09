@@ -1,0 +1,72 @@
+<form [formGroup]="filters">
+    <div class="mat-elevation-z8">
+        <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+
+
+            <!-- First Name Column -->
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef>
+                    <div>
+                        <mat-form-field>
+                            <input matInput class="form-field" placeholder="First Name" formControlName="firstName">
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let row">{{row.firstName}}</td>
+            </ng-container>
+            <!-- Last Name Column -->
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef>
+                    <div>
+                        <mat-form-field>
+                            <input matInput class="form-field" placeholder="Last Name" formControlName="lastName">
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let row">{{row.lastName}}</td>
+            </ng-container>
+            <!-- Open Projects Column -->
+            <ng-container matColumnDef="openProjects">
+                <th mat-header-cell *matHeaderCellDef>
+                    <div>
+                        <mat-form-field>
+                            <input matInput class="form-field" placeholder="Open Projects"
+                                formControlName="openProjects">
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let row">{{row.openProjects.length}}</td>
+            </ng-container>
+            <!-- Working On Projects Column -->
+            <ng-container matColumnDef="workingOnProjects">
+                <th mat-header-cell *matHeaderCellDef>
+                    <div>
+                        <mat-form-field>
+                            <input matInput class="form-field" placeholder="Working On Projects"
+                                formControlName="workingOnProjects">
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let row">{{row.workingOnProjects.length}}</td>
+            </ng-container>
+            <!-- Done Projects Column -->
+            <ng-container matColumnDef="doneProjects">
+                <th mat-header-cell *matHeaderCellDef>
+                    <div>
+                        <mat-form-field>
+                            <input matInput class="form-field" placeholder="Done Projects"
+                                formControlName="doneProjects">
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let row">{{row.doneProjects.length}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator #paginator [length]="dataSource?.data?.length" [pageIndex]="0" [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
+        </mat-paginator>
+    </div>
+</form>

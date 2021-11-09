@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { GoalsComponent } from './goals/goals.component';
 import { PointsComponent } from './points/points.component';
 import { MilestonesComponent } from './milestones/milestones.component';
-import { TableBasicExample } from './task/task.component';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -25,7 +24,6 @@ import { environment } from '../environments/environment';
     GoalsComponent,
     PointsComponent,
     MilestonesComponent,
-    TableBasicExample,
     NavComponent,
   ],
   imports: [

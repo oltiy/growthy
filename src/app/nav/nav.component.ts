@@ -29,6 +29,5 @@ export class NavComponent {
 
   logout() {
     this.authService.setUser(null);
-    localStorage.removeItem('admin');
   }
 }

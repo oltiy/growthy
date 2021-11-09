@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
-
 import { UserStatus } from '../user-status.interface';
 import { UsersState, UsersStore } from './users.store';
 import { UsersQuery } from './users.query';
-import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
-  constructor(
-    private usersStore: UsersStore,
-    private usersQuery: UsersQuery,
-    private router: Router
-  ) {}
+  constructor(private usersStore: UsersStore, private usersQuery: UsersQuery) {}
   addToUsersStauts(users: UserStatus[]) {
     this.usersStore.update((userState: UsersState) => {
       return { ...userState, users };

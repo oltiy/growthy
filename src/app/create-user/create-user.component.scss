@@ -2,16 +2,11 @@
   width: 100%;
 }
 
-.shipping-card {
+.user-card {
   min-width: 120px;
   margin: 20px auto;
   width: 60%;
   border-radius: 10px;
-}
-
-.mat-radio-button {
-  display: block;
-  margin: 5px 0;
 }
 
 .row {
@@ -22,8 +17,4 @@
 .col {
   flex: 1;
   margin-right: 20px;
-}
-
-.col:last-child {
-  margin-right: 0;
 }

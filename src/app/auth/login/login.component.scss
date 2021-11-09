@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.shipping-card {
+.login-card {
   width: 40%;
   margin: 20px auto;
   border-radius: 10px;
@@ -17,11 +17,6 @@ mat-card-actions {
   justify-content: center;
 }
 
-.mat-radio-button {
-  display: block;
-  margin: 5px 0;
-}
-
 .row {
   display: flex;
   flex-direction: row;
@@ -30,8 +25,4 @@ mat-card-actions {
 .col {
   flex: 1;
   margin-right: 20px;
-}
-
-.col:last-child {
-  margin-right: 0;
 }
