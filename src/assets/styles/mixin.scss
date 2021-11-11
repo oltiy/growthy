@@ -1,0 +1,16 @@
+@mixin ac-button() {
+  height: 20px;
+  border-radius: 20px;
+  background: red;
+  color: white;
+}
+
+@function times8($times: 1) {
+  @return 8px * $times;
+}
+
+@mixin rsp-grid($size){
+  display: grid;
+  grid-template-columns:repeat( auto-fit,minmax($size,1fr));
+  place-content: center;
+}

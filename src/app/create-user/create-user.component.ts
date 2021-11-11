@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '../users/state/users.service';
+import { users } from '../users/user-personal.data';
 import { CreateUserService } from './state/create-user.service';
 
 @Component({
@@ -37,7 +38,13 @@ export class CreateUserComponent {
   ) {}
 
   onSubmit(): void {
-    console.log(this.addressForm.value);
+    let newUser = this.addressForm.value;
+    for (let use of Object.values(users)) {
+      if (newUser.email.includes(use.email)) {
+        alert('this email is in the database');
+        return;
+      }
+    }
     this.usersService.updateUserStatus(this.addressForm.value);
     this.createUserService.registration(this.addressForm.value);
     this.router.navigateByUrl('/users');

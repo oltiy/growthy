@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@datorama/akita';
-import { users } from 'src/app/users/user-personal.data';
 import { CreateUserStore, CreateUserState } from './create-user.store';
 
 @Injectable({ providedIn: 'root' })
