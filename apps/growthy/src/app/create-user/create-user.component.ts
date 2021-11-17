@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '../users/state/users.service';
-import { users } from '../users/user-personal.data';
 import { CreateUserService } from './state/create-user.service';
+import { CreateUserQuery } from './state/create-user.query';
+import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-create-user',
+  selector: 'growthy-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss'],
 })
@@ -34,19 +35,31 @@ export class CreateUserComponent {
   constructor(
     private createUserService: CreateUserService,
     private usersService: UsersService,
-    private router: Router
+    private router: Router,
+    private createUserQuery: CreateUserQuery
   ) {}
 
   onSubmit(): void {
-    let newUser = this.addressForm.value;
-    for (let use of Object.values(users)) {
-      if (newUser.email.includes(use.email)) {
-        alert('this email is in the database');
-        return;
-      }
+    const newUser = this.addressForm.value;
+    this.createUserQuery.userData$
+      .pipe(
+        map((data) => {
+          data.filter((user) => {
+            if (user.email === newUser.email) {
+              this.addressForm.reset();
+              return;
+            }
+          });
+        })
+      )
+      .subscribe();
+    if (this.addressForm.value.email != null) {
+      console.log(this.addressForm.value);
+      this.usersService.updateUserStatus(this.addressForm.value);
+      this.createUserService.registration(this.addressForm.value);
+      this.router.navigateByUrl('/users');
+    } else {
+      alert('this email is registered before');
     }
-    this.usersService.updateUserStatus(this.addressForm.value);
-    this.createUserService.registration(this.addressForm.value);
-    this.router.navigateByUrl('/users');
   }
 }

@@ -1,42 +1,29 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": false,
-    "defaultCollection": "@datorama/akita"
-  },
   "version": 1,
-  "newProjectRoot": "projects",
   "projects": {
     "growthy": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        },
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+      "root": "apps/growthy",
+      "sourceRoot": "apps/growthy/src",
+      "prefix": "growthy",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/growthy",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/apps/growthy",
+            "index": "apps/growthy/src/index.html",
+            "main": "apps/growthy/src/main.ts",
+            "polyfills": "apps/growthy/src/polyfills.ts",
+            "tsConfig": "apps/growthy/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/growthy/src/favicon.ico",
+              "apps/growthy/src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "apps/growthy/src/styles.scss",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
             ],
             "scripts": []
           },
@@ -56,8 +43,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/growthy/src/environments/environment.ts",
+                  "with": "apps/growthy/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -91,27 +78,53 @@
             "browserTarget": "growthy:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "lintFilePatterns": [
+              "apps/growthy/src/**/*.ts",
+              "apps/growthy/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/growthy"],
+          "options": {
+            "jestConfig": "apps/growthy/jest.config.js",
+            "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
+    },
+    "growthy-e2e": {
+      "root": "apps/growthy-e2e",
+      "sourceRoot": "apps/growthy-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/growthy-e2e/cypress.json",
+            "devServerTarget": "growthy:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "growthy:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/growthy-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["growthy"]
     }
-  },
-  "defaultProject": "growthy"
+  }
 }

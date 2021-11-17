@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { UsersService } from 'src/app/users/state/users.service';
+
 import { CreateUserQuery } from './create-user.query';
-import { User } from 'src/app/users/user.interface';
+import { User } from '../../users/user.interface';
 import { CreateUserState, CreateUserStore } from './create-user.store';
 
 @Injectable({ providedIn: 'root' })
@@ -19,7 +19,7 @@ export class CreateUserService {
   registration(newUser: User) {
     let usersUpdate: User[];
     this.createUserQuery.userData$.subscribe((data) => {
-      let checkIfTheUserNew = data.filter(
+      const checkIfTheUserNew = data.filter(
         (user) => user.email === newUser.email
       );
       if (checkIfTheUserNew.length === 0) {
@@ -28,6 +28,7 @@ export class CreateUserService {
         console.log(usersUpdate);
       }
     });
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.addUserToUsersData(usersUpdate!);
   }
 }
