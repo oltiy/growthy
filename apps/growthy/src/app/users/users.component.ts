@@ -5,7 +5,7 @@ import { User } from './user.interface';
 import { CreateUserQuery } from '../create-user/state/create-user.query';
 
 @Component({
-  selector: 'app-users',
+  selector: 'growthy-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })

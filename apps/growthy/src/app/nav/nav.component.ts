@@ -6,7 +6,7 @@ import { AuthService } from '../auth/state/auth.service';
 import { AuthQuery } from '../auth/state/auth.query';
 
 @Component({
-  selector: 'app-nav',
+  selector: 'growthy-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })

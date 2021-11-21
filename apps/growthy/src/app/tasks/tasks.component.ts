@@ -6,7 +6,7 @@ import { UsersQuery } from '../users/state/users.query';
 import { TasksQuery } from './state/tasks.query';
 
 @Component({
-  selector: 'app-tasks',
+  selector: 'growthy-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
 })

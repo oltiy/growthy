@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../state/auth.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'growthy-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
@@ -17,8 +17,8 @@ export class LoginComponent {
   constructor(private authService: AuthService) {}
 
   login() {
-    let email = this.loginForm.value.email;
-    let password = this.loginForm.value.password;
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
     this.authService.login(email, password);
   }
 }

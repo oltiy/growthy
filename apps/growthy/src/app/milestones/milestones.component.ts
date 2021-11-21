@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-milestones',
+  selector: 'growthy-milestones',
   templateUrl: './milestones.component.html',
-  styleUrls: ['./milestones.component.scss']
+  styleUrls: ['./milestones.component.scss'],
 })
-export class MilestonesComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class MilestonesComponent {}
