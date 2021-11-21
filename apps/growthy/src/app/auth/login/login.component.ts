@@ -17,8 +17,8 @@ export class LoginComponent {
   constructor(private authService: AuthService) {}
 
   login() {
-    let loginUserEmail = this.loginForm.value.email;
-    let loginUserPassword = this.loginForm.value.password;
-    this.authService.login(loginUserEmail, loginUserPassword);
+    let email = this.loginForm.value.email;
+    let password = this.loginForm.value.password;
+    this.authService.login(email, password);
   }
 }

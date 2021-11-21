@@ -1,4 +1,4 @@
-<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card class="user-card">
     <mat-card-header>
       <mat-card-title>Create user</mat-card-title>
@@ -9,7 +9,7 @@
         <div class="col">
           <mat-form-field class="full-width">
             <input matInput placeholder="First name" formControlName="firstName">
-            <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
+            <mat-error *ngIf="userForm.controls['firstName'].hasError('required')">
               First name is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -17,7 +17,7 @@
         <div class="col">
           <mat-form-field class="full-width">
             <input matInput placeholder="Last name" formControlName="lastName">
-            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+            <mat-error *ngIf="userForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -31,7 +31,7 @@
 
           <mat-form-field class="full-width">
             <input matInput type="email" placeholder="Email" formControlName="email">
-            <mat-error *ngIf=" addressForm.controls['email'].hasError('email')">
+            <mat-error *ngIf=" userForm.controls['email'].hasError('email')">
               Email is not <strong>correct</strong>
             </mat-error>
           </mat-form-field>
@@ -51,7 +51,7 @@
         <div class="col">
           <mat-form-field class="full-width">
             <input matInput type="password" placeholder="password" formControlName="password">
-            <mat-error *ngIf="addressForm.controls['password'].hasError('required')">
+            <mat-error *ngIf="userForm.controls['password'].hasError('required')">
               Password is not <strong>correct</strong>
             </mat-error>
           </mat-form-field>

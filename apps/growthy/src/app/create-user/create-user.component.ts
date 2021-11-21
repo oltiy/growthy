@@ -5,6 +5,7 @@ import { UsersService } from '../users/state/users.service';
 import { CreateUserService } from './state/create-user.service';
 import { CreateUserQuery } from './state/create-user.query';
 import { map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'growthy-create-user',
@@ -12,7 +13,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./create-user.component.scss'],
 })
 export class CreateUserComponent {
-  addressForm = new FormGroup({
+  userForm = new FormGroup({
     userId: new FormControl(''),
     firstName: new FormControl(null, Validators.required),
     lastName: new FormControl(null, Validators.required),
@@ -36,30 +37,31 @@ export class CreateUserComponent {
     private createUserService: CreateUserService,
     private usersService: UsersService,
     private router: Router,
-    private createUserQuery: CreateUserQuery
+    private createUserQuery: CreateUserQuery,
+    private snackBar: MatSnackBar
   ) {}
 
   onSubmit(): void {
-    const newUser = this.addressForm.value;
+    const newUser = this.userForm.value;
     this.createUserQuery.userData$
       .pipe(
         map((data) => {
           data.filter((user) => {
             if (user.email === newUser.email) {
-              this.addressForm.reset();
+              this.userForm.reset();
               return;
             }
           });
         })
       )
       .subscribe();
-    if (this.addressForm.value.email != null) {
-      console.log(this.addressForm.value);
-      this.usersService.updateUserStatus(this.addressForm.value);
-      this.createUserService.registration(this.addressForm.value);
+    if (this.userForm.value.email != null) {
+      console.log(this.userForm.value);
+      this.usersService.updateUserStatus(this.userForm.value);
+      this.createUserService.registration(this.userForm.value);
       this.router.navigateByUrl('/users');
     } else {
-      alert('this email is registered before');
+      this.snackBar.open('this email is registered before', 'back');
     }
   }
 }

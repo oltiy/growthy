@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@growthy/growthy/shared-ui": ["libs/growthy/shared-ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
