@@ -4,12 +4,12 @@ import { users } from '../../users/user-personal.data';
 import { User } from '../../users/user.interface';
 
 export interface CreateUserState {
-  user: User[];
+  users: User[];
 }
 
 export function createInitialState(): CreateUserState {
   return {
-    user: users,
+    users: users,
   };
 }
 

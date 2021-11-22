@@ -25,7 +25,11 @@ export class AuthService {
     if (!isUserExists) {
       this.snackBar.open(
         'Please check that you entered the right email',
-        'back'
+        'back',
+        {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        }
       );
       this.router.navigateByUrl('/login');
     } else if (isUserExists.password === password) {
@@ -34,7 +38,11 @@ export class AuthService {
     } else {
       this.snackBar.open(
         'Please check that you entered the right password',
-        'back'
+        'back',
+        {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        }
       );
       this.router.navigateByUrl('/login');
     }

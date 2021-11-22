@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Injectable } from '@angular/core';
 import { UserStatus } from '../user-status.interface';
 import { UsersState, UsersStore } from './users.store';
@@ -15,7 +16,7 @@ export class UsersService {
   updateUserStatus(addNewUser: UserStatus) {
     let usersUpdate: UserStatus[];
     this.usersQuery.selectUsers$.subscribe((data) => {
-      let checkIfTheUserNew = data.filter(
+      const checkIfTheUserNew = data.filter(
         (user) => user.email === addNewUser.email
       );
       if (checkIfTheUserNew.length === 0) {
